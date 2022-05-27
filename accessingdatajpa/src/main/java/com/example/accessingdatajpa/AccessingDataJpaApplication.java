@@ -30,13 +30,8 @@ public class AccessingDataJpaApplication {
 			repository.save(new Customer("Kim", "Bauer"));
 			repository.save(new Customer("David", "Palmer"));
 			repository.save(new Customer("Michelle", "Dessler"));
-//			repository.save(new Customer("Jack", "Bauer"));
-//			repository.save(new Customer("Chloe", "O'Brian"));
-//			repository.save(new Customer("Kim", "Bauer"));
-//			repository.save(new Customer("David", "Palmer"));
-//			repository.save(new Customer("Michelle", "Dessler"));
 
-			// fetch all customers
+			// fetch all customers and orders
 			log.info("Orders found with findAll():");
 			log.info("-------------------------------");
 			for (ClickOrders clickOrders : clickOrderRepository.findAll()) {
@@ -51,28 +46,28 @@ public class AccessingDataJpaApplication {
 			}
 			log.info("");
 
-			// fetch an individual customer by ID
-			ClickOrders clickOrders = clickOrderRepository.findById(1L);
-			log.info("Orders found with findById(1L):");
+			// fetch an individual customer and orders by ID
+			ClickOrders clickOrders = clickOrderRepository.findById(4L);
+			log.info("Orders found with findById(4L):");
 			log.info("--------------------------------");
 			log.info(clickOrders.toString());
 			log.info("");
 
 			Customer customer = repository.findById(8L);
-			log.info("Orders found with findById(1L):");
+			log.info("Customer found with findById(8L):");
 			log.info("--------------------------------");
 			log.info(customer.toString());
 			log.info("");
 
-			// fetch customers by last name
+			// fetch customers and orders by last name
 			log.info("Orders found with findValue('shorts'):");
 			log.info("--------------------------------------------");
 			clickOrderRepository.findByValue("shorts").forEach(shorts -> {
 				log.info(shorts.toString());
-
+			log.info("");
 			});
 
-			log.info("Orders found with findValue('Bauer'):");
+			log.info("Customer found with findValue('Bauer'):");
 			log.info("--------------------------------------------");
 			repository.findByLastName("Bauer").forEach(bauer -> {
 				log.info(bauer.toString());
@@ -81,42 +76,5 @@ public class AccessingDataJpaApplication {
 			log.info("");
 		};
 	}
-
-//	public CommandLineRunner demoCustomer(CustomerRepository repository) {
-//		return (args) -> {
-//			// save a few customers
-//			repository.save(new Customer("Jack", "Bauer"));
-//			repository.save(new Customer("Chloe", "O'Brian"));
-//			repository.save(new Customer("Kim", "Bauer"));
-//			repository.save(new Customer("David", "Palmer"));
-//			repository.save(new Customer("Michelle", "Dessler"));
-//
-//			// fetch all customers
-//			log.info("Customers found with findAll():");
-//			log.info("-------------------------------");
-//			for (Customer customer : repository.findAll()) {
-//				log.info(customer.toString());
-//			}
-//			log.info("");
-//
-//			// fetch an individual customer by ID
-//			Customer customer = repository.findById(1L);
-//			log.info("Customer found with findById(1L):");
-//			log.info("--------------------------------");
-//			log.info(customer.toString());
-//			log.info("");
-//
-//			// fetch customers by last name
-//			log.info("Customer found with findByLastName('Bauer'):");
-//			log.info("--------------------------------------------");
-//			repository.findByLastName("Bauer").forEach(bauer -> {
-//				log.info(bauer.toString());
-//			});
-//			// for (Customer bauer : repository.findByLastName("Bauer")) {
-//			// 	log.info(bauer.toString());
-//			// }
-//			log.info("");
-//		};
-//	}
 
 }
