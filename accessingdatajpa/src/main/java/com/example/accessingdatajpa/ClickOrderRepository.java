@@ -4,9 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ClickOrderRepository extends CrudRepository<ClickOrder, Long> {
+public interface ClickOrderRepository extends CrudRepository<ClickOrders, Long> {
 
-    List<Customer> findByValue(String value);
+    List<ClickOrders> findByValue(String value);
 
-    Customer findById(long id);
+    ClickOrders findById(long id);
 }

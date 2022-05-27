@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ClickOrder {
+public class ClickOrders {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,18 +14,21 @@ public class ClickOrder {
     private String value;
     private String comment;
 
-    protected ClickOrder() {}
+    private String date;
 
-    public ClickOrder(String value, String comment) {
+    protected ClickOrders() {}
+
+    public ClickOrders(String value, String comment, String date) {
         this.value = value;
         this.comment = comment;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, value='%s', comment='%s']",
-                id, value, comment);
+                "Order[id=%d, value='%s', comment='%s', date='%s']",
+                id, value, comment, date);
     }
 
     public Long getId() {
@@ -38,5 +41,9 @@ public class ClickOrder {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

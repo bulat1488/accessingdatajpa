@@ -17,34 +17,39 @@ public class AccessingDataJpaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(CustomerRepository repository) {
+	public CommandLineRunner demoOrder(ClickOrderRepository clickOrderRepository) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new Customer("Jack", "Bauer"));
-			repository.save(new Customer("Chloe", "O'Brian"));
-			repository.save(new Customer("Kim", "Bauer"));
-			repository.save(new Customer("David", "Palmer"));
-			repository.save(new Customer("Michelle", "Dessler"));
+			clickOrderRepository.save(new ClickOrders("sneakers", "super","15.05.2021 12:08"));
+			clickOrderRepository.save(new ClickOrders("cap", "-","18.09.2021 15:55"));
+			clickOrderRepository.save(new ClickOrders("shorts", "++++++!!!","29.11.2021 09:18"));
+			clickOrderRepository.save(new ClickOrders("swimsuit", "very open","06.01.2022 11:11"));
+			clickOrderRepository.save(new ClickOrders("track suit", "not a high-quality suit","12.04.2021 16:15"));
+//			repository.save(new Customer("Jack", "Bauer"));
+//			repository.save(new Customer("Chloe", "O'Brian"));
+//			repository.save(new Customer("Kim", "Bauer"));
+//			repository.save(new Customer("David", "Palmer"));
+//			repository.save(new Customer("Michelle", "Dessler"));
 
 			// fetch all customers
-			log.info("Customers found with findAll():");
+			log.info("Orders found with findAll():");
 			log.info("-------------------------------");
-			for (Customer customer : repository.findAll()) {
-				log.info(customer.toString());
+			for (ClickOrders clickOrders : clickOrderRepository.findAll()) {
+				log.info(clickOrders.toString());
 			}
 			log.info("");
 
 			// fetch an individual customer by ID
-			Customer customer = repository.findById(1L);
-			log.info("Customer found with findById(1L):");
+			ClickOrders clickOrders = clickOrderRepository.findById(1L);
+			log.info("Orders found with findById(1L):");
 			log.info("--------------------------------");
-			log.info(customer.toString());
+			log.info(clickOrders.toString());
 			log.info("");
 
 			// fetch customers by last name
-			log.info("Customer found with findByLastName('Bauer'):");
+			log.info("Orders found with findValue('shorts'):");
 			log.info("--------------------------------------------");
-			repository.findByLastName("Bauer").forEach(bauer -> {
+			clickOrderRepository.findByValue("shorts").forEach(bauer -> {
 				log.info(bauer.toString());
 			});
 			// for (Customer bauer : repository.findByLastName("Bauer")) {
