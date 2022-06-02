@@ -1,6 +1,7 @@
 package com.example.accessingdatajpa.dto;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class ClickOrders {
@@ -11,20 +12,19 @@ public class ClickOrders {
     private String value;
     private String comment;
 
-    private String date;
+    private Timestamp date;
 
     protected ClickOrders() {}
 
-    public ClickOrders(String value, String comment, String date) {
+    public ClickOrders(String value, String comment) {
         this.value = value;
         this.comment = comment;
-        this.date = date;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Order[id=%d, value='%s', comment='%s', date='%s']",
+                "Order[id=%d, value='%s', comment='%s']",
                 id, value, comment, date);
     }
 
@@ -40,7 +40,4 @@ public class ClickOrders {
         return comment;
     }
 
-    public String getDate() {
-        return date;
-    }
 }
