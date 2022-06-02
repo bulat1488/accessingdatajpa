@@ -1,5 +1,6 @@
-package com.example.accessingdatajpa;
+package com.example.accessingdatajpa.service;
 
+import com.example.accessingdatajpa.dto.ClickOrders;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

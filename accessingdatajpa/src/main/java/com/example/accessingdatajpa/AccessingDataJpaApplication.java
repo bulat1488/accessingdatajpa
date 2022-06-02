@@ -1,5 +1,9 @@
 package com.example.accessingdatajpa;
 
+import com.example.accessingdatajpa.dto.ClickOrders;
+import com.example.accessingdatajpa.dto.Customer;
+import com.example.accessingdatajpa.service.ClickOrderRepository;
+import com.example.accessingdatajpa.service.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
