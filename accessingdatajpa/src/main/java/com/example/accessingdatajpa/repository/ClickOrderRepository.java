@@ -8,7 +8,4 @@ import java.util.List;
 
 public interface ClickOrderRepository extends JpaRepository<ClickOrders, Long> {
 
-//    List<ClickOrders> findByValue(String value);
-//
-//    ClickOrders findById(long id);
 }

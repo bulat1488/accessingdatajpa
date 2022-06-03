@@ -1,6 +1,7 @@
 package com.example.accessingdatajpa.controller;
 
 
+import com.example.accessingdatajpa.dto.ClickOrders;
 import com.example.accessingdatajpa.dto.Customer;
 import com.example.accessingdatajpa.repository.ClickOrderRepository;
 import com.example.accessingdatajpa.repository.CustomerRepository;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("customer")
-public class CustomerController {
+@RequestMapping("orders")
+public class ClickOrdersController {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -25,28 +26,18 @@ public class CustomerController {
 
     @GetMapping("list")
     public String showAllcustomers(Model model) {
-        model.addAttribute("customer", customerRepository.findAll());
-        return "cusromer-list";
-    }
-
-    @GetMapping("customer/{id}")
-    public String showCustomerId(@PathVariable("id") long id, Model model) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid customer id: " + id));
-        model.addAttribute("customer", customer);
-        return "customer-viev";
+        model.addAttribute("clickOrders", clickOrderRepository.findAll());
+        return "clickOrders-list";
     }
 
     @PostMapping("add")
     @Async
-    public String addCustomer(Customer customer, BindingResult result, Model model) {
+    public String addCustomer(ClickOrders clickOrders, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("clickorders", clickOrderRepository.findAll());
-            return "customer-add";
+            return "clickOrders-add";
         }
-        customerRepository.save(customer);
+        clickOrderRepository.save(clickOrders);
 
         return "redirect:list";
     }
-
 }

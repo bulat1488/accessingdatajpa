@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "customer")
 public class Customer {
 
     @Id
@@ -15,16 +16,20 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany
-    @JoinColumn(name = "clickOrders_id")
-    private List<ClickOrders> clickOrdersList;
+    @ManyToMany
+    @JoinTable(
+            name = "customer_clickOrders",
+            joinColumns = @JoinColumn(name = "customer_id", referencedColumnName =  "id"),
+            inverseJoinColumns = @JoinColumn(name = "clickOrders_id", referencedColumnName = "id")
+    )
+    private List<ClickOrders> clickOrders;
 
-    protected Customer() {}
-
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+//    protected Customer() {}
+//
+//    public Customer(String firstName, String lastName) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//    }
 
     @Override
     public String toString() {
@@ -46,6 +51,12 @@ public class Customer {
     }
 
     public List<ClickOrders> getСlickOrdersList() {
-        return clickOrdersList;
+        return clickOrders;
+    }
+
+    @PreRemove
+    private void removeFromClickOrders(){
+        for (ClickOrders clickOrders : clickOrders)
+            clickOrders.getCustomers().remove(this);
     }
 }
