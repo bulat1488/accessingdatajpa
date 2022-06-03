@@ -29,7 +29,7 @@ public class CustomerController {
         return "cusromer-list";
     }
 
-    @GetMapping("customer/{id}")
+    @GetMapping("list/{id}")
     public String showCustomerId(@PathVariable("id") long id, Model model) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid customer id: " + id));

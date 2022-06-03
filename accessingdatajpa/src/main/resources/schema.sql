@@ -1,6 +1,6 @@
-create schema customer;
+create schema accessingdatajpa;
 
-create table customer.user
+create table accessingdatajpa.customer
 (
     id   INTEGER primary key,
     name varchar
