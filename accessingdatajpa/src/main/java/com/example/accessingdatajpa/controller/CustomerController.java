@@ -1,52 +1,30 @@
 package com.example.accessingdatajpa.controller;
 
 
-import com.example.accessingdatajpa.dto.Customer;
-import com.example.accessingdatajpa.repository.ClickOrderRepository;
-import com.example.accessingdatajpa.repository.CustomerRepository;
+import com.example.accessingdatajpa.entity.Customer;
+//import com.example.accessingdatajpa.repository.ClickOrderRepository;
+import com.example.accessingdatajpa.service.CustomerService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
-@RequestMapping("customer")
+@RestController
+@AllArgsConstructor
 public class CustomerController {
 
     @Autowired
-    private CustomerRepository customerRepository;
-    private ClickOrderRepository clickOrderRepository;
+    private CustomerService customerService;
 
-    @GetMapping("list")
-    public String showAllcustomers(Model model) {
-        model.addAttribute("customer", customerRepository.findAll());
-        return "cusromer-list";
+    @GetMapping(path = "/customer/{customerId}")
+    public Customer getCustomer(@PathVariable long customerId) {
+        return customerService.getCustomer(customerId);
     }
 
-    @GetMapping("list/{id}")
-    public String showCustomerId(@PathVariable("id") long id, Model model) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid customer id: " + id));
-        model.addAttribute("customer", customer);
-        return "customer-viev";
-    }
-
-    @PostMapping("add")
-    @Async
-    public String addCustomer(Customer customer, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("clickorders", clickOrderRepository.findAll());
-            return "customer-add";
-        }
-        customerRepository.save(customer);
-
-        return "redirect:list";
+    @PostMapping(path = "/customer")
+    public Customer getCustomer(@RequestBody Customer customer) {
+        return customerService.registerCustomer(customer.getFirstName(), customer.getLastName());
     }
 
 }
