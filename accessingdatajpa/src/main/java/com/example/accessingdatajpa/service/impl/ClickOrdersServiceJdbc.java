@@ -1,9 +1,7 @@
 package com.example.accessingdatajpa.service.impl;
 
 import com.example.accessingdatajpa.entity.ClickOrders;
-import com.example.accessingdatajpa.entity.Customer;
 import com.example.accessingdatajpa.service.ClickOrdersService;
-import com.example.accessingdatajpa.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,6 @@ public class ClickOrdersServiceJdbc implements ClickOrdersService {
     }
 
     private ClickOrders registerClickOrdersLocking(String goods, String comment) {
-        jdbcTemplate.execute("LOCK TABLE accessingdatajpa.clickorders IN ROW EXCLUSIVE MODE");
 
         long id = generateId();
 
@@ -49,6 +46,14 @@ public class ClickOrdersServiceJdbc implements ClickOrdersService {
                     return clickOrders;
                 });
 
+    }
+
+    @Override
+    public boolean deleteOrders(long id){
+        String sql = "DELETE FROM accessingdatajpa.clickorders WHERE id = ?";
+        Object[] args = new Object[] {id};
+
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     private long generateId() {

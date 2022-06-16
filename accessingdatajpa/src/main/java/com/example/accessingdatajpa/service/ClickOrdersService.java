@@ -8,4 +8,6 @@ public interface ClickOrdersService {
 
     ClickOrders getOrders(long id);
 
+    boolean deleteOrders(long id);
+
 }

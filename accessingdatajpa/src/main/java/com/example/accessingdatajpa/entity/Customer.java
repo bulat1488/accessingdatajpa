@@ -3,8 +3,7 @@ package com.example.accessingdatajpa.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Setter
 @Getter
@@ -19,6 +18,4 @@ public class Customer {
     private Long id;
     private String firstName;
     private String lastName;
-   // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-   // private List<ClickOrders> orders=new ArrayList<>();
 }

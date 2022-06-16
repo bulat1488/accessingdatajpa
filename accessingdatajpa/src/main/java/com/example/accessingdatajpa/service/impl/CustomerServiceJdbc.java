@@ -28,8 +28,6 @@ public class CustomerServiceJdbc implements CustomerService {
     }
 
     private Customer registerCustomerLocking(String firstName, String lastName) {
-        //
-        // jdbcTemplate.execute("LOCK TABLE accessingdatajpa.customer IN ROW EXCLUSIVE MODE");
 
         long id = generateId();
 

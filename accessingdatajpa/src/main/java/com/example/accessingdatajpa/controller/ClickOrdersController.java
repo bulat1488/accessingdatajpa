@@ -1,10 +1,7 @@
 package com.example.accessingdatajpa.controller;
 
-
 import com.example.accessingdatajpa.entity.ClickOrders;
-import com.example.accessingdatajpa.entity.Customer;
 import com.example.accessingdatajpa.service.ClickOrdersService;
-import com.example.accessingdatajpa.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +20,12 @@ public class ClickOrdersController {
     }
 
     @PostMapping(path = "/clickorders")
-    public ClickOrders getCustomer(@RequestBody ClickOrders clickOrders) {
+    public ClickOrders regOrders(@RequestBody ClickOrders clickOrders) {
         return clickOrdersService.registerOrders(clickOrders.getGoods(), clickOrders.getComment());
     }
 
+    @DeleteMapping(path = "/clickorders/delete/{clickordersId}")
+    public boolean deleteOrders(@PathVariable long clickordersId) {
+        return clickOrdersService.deleteOrders(clickordersId);
+    }
 }
